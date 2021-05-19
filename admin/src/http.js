@@ -3,7 +3,8 @@ import Vue from 'vue'
 import router from './router/index'
 
 const http = axios.create({
-    baseURL: 'http://localhost:3000/admin/api'
+    baseURL: process.env.VUE_APP_API_URL || '/admin/api'
+    // baseURL: 'http://localhost:3000/admin/api'
 })
 // 请求拦截器，
 http.interceptors.request.use(function (config) {
@@ -19,11 +20,11 @@ http.interceptors.request.use(function (config) {
 http.interceptors.response.use(res => {
     return res
 },err => {
-    if(err.response.data.message){
+    if(err.response.data.message){ 
     //     Vue.prototype.$message({
     //     type: 'error',
     //     message: err.response.data.message
-    // })
+    // })//服务端返回错误代码且有一个message时将其弹出
     Vue.prototype.$message.error(err.response.data.message)
     if(err.response.status === 401){
         router.push('/login')
