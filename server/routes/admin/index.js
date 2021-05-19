@@ -69,7 +69,7 @@ module.exports = app => {
         //  這裏面就能獲取到上傳圖片
         const file = req.file
         // 拼出url,再展示
-        file.url = `http://localhost:3000/uploads/${file.filename}`
+        file.url = `http://www.yxiaoping.com/uploads/${file.filename}`
         res.send(file)
     })
 
